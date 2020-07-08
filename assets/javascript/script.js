@@ -1,6 +1,6 @@
 const Player = (name, tag) => {
-  const getName = () => this.name;
-  const getTag = () => this.tag;
+  const getName = () => name;
+  const getTag = () => tag;
 
   const move = () => {
 
@@ -9,9 +9,9 @@ const Player = (name, tag) => {
 };
 
 const GameBoard = (() => {
-  const winningGame = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
+  const winningGame = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
-  const gameBoard = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+  const gameBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   return {
     winningGame,
@@ -20,23 +20,27 @@ const GameBoard = (() => {
 })();
 
 const GameFlow = (() => {
-  const makePlayer = (name, tag) => {
-    return Player(name, tag);
-  };
+  // create an player
+  // add a sign
+  const addPlayer = (name, tag) => Player(name, tag);
+  const makeMove = (index, player) => {
+    // GameBoard.gameBoard[index] = player.getTag();
+    GameBoard.gameBoard.splice(index, 1, player.getTag());
+    return GameBoard.gameBoard;
+  }
   // chooseMove()
+
   // makeMove()
   // displayBoard()
   // checkForWinner()
 
   return {
-    makePlayer,
+    addPlayer,
+    makeMove,
+
   };
 })();
 
-GameFlow.makePlayer('Jason', 'X');
-console.log(GameFlow.makePlayer);
+const playerJason = GameFlow.addPlayer('Jason', 'X');
+console.log(GameFlow.makeMove(0, playerJason));
 
-const player = Player('Ptest', '$');
-console.log(player);
-
-console.log(GameBoard);
