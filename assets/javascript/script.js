@@ -1,17 +1,42 @@
 const Player = (name, tag) => {
-  const getName = () => name;
-  const getTag = () => tag;
+  const getName = () => this.name;
+  const getTag = () => this.tag;
 
   const move = () => {
 
   };
+  return { getName, getTag, name, tag };
 };
 
-const GameBoard = () => {
+const GameBoard = (() => {
   const winningGame = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
 
   const gameBoard = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
 
-};
+  return {
+    winningGame,
+    gameBoard,
+  };
+})();
 
-// Sol
+const GameFlow = (() => {
+  const makePlayer = (name, tag) => {
+    return Player(name, tag);
+  };
+  // chooseMove()
+  // makeMove()
+  // displayBoard()
+  // checkForWinner()
+
+  return {
+    makePlayer,
+  };
+})();
+
+GameFlow.makePlayer('Jason', 'X');
+console.log(GameFlow.makePlayer);
+
+const player = Player('Ptest', '$');
+console.log(player);
+
+console.log(GameBoard);
