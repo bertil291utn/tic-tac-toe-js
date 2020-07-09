@@ -1,5 +1,3 @@
-const readline = require('readline-sync');
-
 const Player = (name, tag) => {
   const getName = () => name;
   const getTag = () => tag;
@@ -33,18 +31,28 @@ const GameFlow = (() => {
     // GameBoard.gameBoard[index] = player.getTag();
     GameBoard.gameBoard.splice(index, 1, player.getTag());
     player.choices.push(index);
+    return GameBoard.gameBoard;
   };
 
   const displayBoard = () => { console.log(GameBoard.gameBoard); };
 
+  const flow = (player1, player2, index) => {
+    for (let i=0 ; i < 9 ; i++){
+      // wait for the user to input an index
+      let index = prompt("Please choose a cell");
+      makeMove(index, i%2==0 ? player1 : player2);
+      if (i>4 && theresWinner(player1, player2)) break;
+    }
+  };
+
   const gameOutcome = (player) => GameBoard.winningGame.some(winMatch => winMatch.every(r => player.choices.includes(r)));
 
   const winner = (player1, player2) => {
-    if (gameOutcome(player1)) {
+    if (GameFlow.gameOutcome(player1)) {
       return `Player ${player1.getName()} is the winner`;
     }
 
-    if (gameOutcome(player2)) {
+    if (GameFlow.gameOutcome(player2)) {
       return `Player ${player2.getName()} is the winner`;
     }
 
@@ -55,18 +63,18 @@ const GameFlow = (() => {
   };
 
   const theresWinner = (player1, player2) => {
-    if (gameOutcome(player1) || gameOutcome(player2)) {
+    if (GameFlow.gameOutcome(player1) || GameFlow.gameOutcome(player2)) {
       return true;
     }
     return false;
   };
 
   const itsDraw = () => {
-    if (GameBoard.fullGameBoard()) {
+    if (GameBoard.fullGameBoard() && !theresWinner) {
       return true;
     }
     return false;
-  };
+  }
 
 
   return {
@@ -74,45 +82,34 @@ const GameFlow = (() => {
     makeMove,
     gameOutcome,
     winner,
-    theresWinner,
-    itsDraw,
+    flow,
   };
 })();
 
 const playerJason = GameFlow.addPlayer('Jason', 'X');
 const playerMark = GameFlow.addPlayer('Mark', 'O');
-
-// init play entering a position 
-// let index = 1;
-// while (!GameFlow.theresWinner(playerJason, playerMark) || GameFlow.itsDraw()) {
-//   const player = index % 2 === 1 ? playerJason : playerMark;
-//   const indice = readline.question(`Enter index position ${player.getName()}: `);
-//   GameFlow.makeMove(+indice, player);
-
-//   if (index >= 5) {
-//     console.log(GameFlow.winner(playerJason, playerMark));
-//   }
-//   index += 1;
-// }
+// console.log(GameBoard.gameBoard); // check the status of the board
+// // getIndexFromUser
+// GameFlow.flow(playerJason, playerMark, 0);
+// console.log(GameFlow.winner(playerJason, playerMark));
+// console.log(GameBoard.gameBoard); // check the status of the board
 
 //0,2,1,3,5,4,6,7,8  tie
 //0,1,2,3,4,5,6,7
-playerJason.choices = [0, 1, 5, 6, 7];
-playerMark.choices = [2, 3, 4, 8];
-GameBoard.gameBoard = ['X', 'X', 'O',
-                       'O', 'O', 'X',
-                       'X', 'X', 'O'];
-console.log(playerJason.choices);
-console.log(playerMark.choices);
-console.log(GameFlow.theresWinner(playerJason, playerMark));
-console.log("GameOutcome:");
+// XOX
+// OXO
+// X78
+
+playerJason.choices = [0, 1, 2];
+playerMark.choices = [3, 4];
+GameBoard.gameBoard = ['X', 'X', 'X', 'O', 'O', 5, 6, 7, 8];
+// const gameOutcome = (player) =>
+//  GameBoard.winningGame.some(winMatch => winMatch.every(r =>
+//    player.choices.includes(r)));
 console.log(GameFlow.gameOutcome(playerJason));
-console.log("Tie?:");
-console.log(GameFlow.winner(playerJason, playerMark));
-//0,2,1,3,5,4,6,7,8
-
-console.log(GameBoard.gameBoard);
-console.log(GameBoard.fullGameBoard());
-console.log(GameBoard.gameBoard.every(r => (/(X|O)/).test(r)));
 
 
+// GameBoard.winningGame.some(winMatch => winMatch.every(r =>
+//    player.choices.includes(r)));
+
+// console.log([0,1,2].every(r => playerJason.choices.includes(r)));
