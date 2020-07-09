@@ -1,11 +1,12 @@
 const Player = (name, tag) => {
   const getName = () => name;
   const getTag = () => tag;
+  const choices = [];
 
   const move = () => {
 
   };
-  return { getName, getTag, name, tag };
+  return { getName, getTag, choices };
 };
 
 const GameBoard = (() => {
@@ -26,21 +27,32 @@ const GameFlow = (() => {
   const makeMove = (index, player) => {
     // GameBoard.gameBoard[index] = player.getTag();
     GameBoard.gameBoard.splice(index, 1, player.getTag());
+    player.choices.push(index);
     return GameBoard.gameBoard;
   }
-  // chooseMove()
 
-  // makeMove()
+  const displayBoard = () => { console.log(GameBoard.gameBoard); }
+
+  const gameOutcome = (player) => {
+    return GameBoard.winningGame.some( winMatch => winMatch.every(r => player.choices.includes(r) ) );
+  }
+
   // displayBoard()
   // checkForWinner()
 
   return {
     addPlayer,
     makeMove,
-
+    gameOutcome,
   };
 })();
 
 const playerJason = GameFlow.addPlayer('Jason', 'X');
-console.log(GameFlow.makeMove(0, playerJason));
-
+const playerMark = GameFlow.addPlayer('Mark', 'O');
+GameFlow.makeMove(0, playerJason);
+console.log(playerJason);
+GameFlow.makeMove(3, playerMark);
+GameFlow.makeMove(1, playerJason);
+GameFlow.makeMove(4, playerMark);
+GameFlow.makeMove(2, playerJason);
+console.log(GameFlow.gameOutcome(playerMark));
