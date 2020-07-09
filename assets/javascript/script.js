@@ -1,3 +1,5 @@
+const readline = require('readline-sync');
+
 const Player = (name, tag) => {
   const getName = () => name;
   const getTag = () => tag;
@@ -31,18 +33,18 @@ const GameFlow = (() => {
     // GameBoard.gameBoard[index] = player.getTag();
     GameBoard.gameBoard.splice(index, 1, player.getTag());
     player.choices.push(index);
-    return GameBoard.gameBoard;
   };
 
   const displayBoard = () => { console.log(GameBoard.gameBoard); };
 
   const gameOutcome = (player) => GameBoard.winningGame.some(winMatch => winMatch.every(r => player.choices.includes(r)));
+
   const winner = (player1, player2) => {
-    if (GameFlow.gameOutcome(player1)) {
+    if (gameOutcome(player1)) {
       return `Player ${player1.getName()} is the winner`;
     }
 
-    if (GameFlow.gameOutcome(player2)) {
+    if (gameOutcome(player2)) {
       return `Player ${player2.getName()} is the winner`;
     }
 
@@ -53,18 +55,18 @@ const GameFlow = (() => {
   };
 
   const theresWinner = (player1, player2) => {
-    if (GameFlow.gameOutcome(player1) || GameFlow.gameOutcome(player2)) {
-      return true
-    }
-    return false;
-  }
-
-  const itsDraw = () => {
-    if (GameBoard.fullGameBoard() && !theresWinner) {
+    if (gameOutcome(player1) || gameOutcome(player2)) {
       return true;
     }
     return false;
-  }
+  };
+
+  const itsDraw = () => {
+    if (GameBoard.fullGameBoard()) {
+      return true;
+    }
+    return false;
+  };
 
 
   return {
@@ -79,37 +81,20 @@ const GameFlow = (() => {
 
 const playerJason = GameFlow.addPlayer('Jason', 'X');
 const playerMark = GameFlow.addPlayer('Mark', 'O');
-//WIN CASE
-// GameFlow.makeMove(0, playerJason);
-// GameFlow.makeMove(3, playerMark);
-// GameFlow.makeMove(1, playerJason);
-// GameFlow.makeMove(4, playerMark);
-// GameFlow.makeMove(2, playerJason);
-// console.log(GameFlow.winner(playerJason, playerMark));
 
-//DRAW CASE
+// init play entering a position 
+let index = 1;
+while (!GameFlow.theresWinner(playerJason, playerMark) || GameFlow.itsDraw()) {
+  const player = index % 2 === 1 ? playerJason : playerMark;
+  const indice = readline.question(`Enter index position ${player.getName()}: `);
+  GameFlow.makeMove(+indice, player);
 
-
-GameFlow.makeMove(0, playerJason);
-GameFlow.makeMove(2, playerMark);
-GameFlow.makeMove(1, playerJason);
-GameFlow.makeMove(3, playerMark);
-GameFlow.makeMove(5, playerJason);
-const winner = GameFlow.winner(playerJason, playerMark) == '' ? false :;
-for (let i=0 ; i < 9 ; i++){
-  console.log(i%2==0 ? p1 : p2); // make user choose
-  if (i>4) checkforWinner;   // check for winner
+  if (index >= 5) {
+    console.log(GameFlow.winner(playerJason, playerMark));
+  }
+  index += 1;
 }
 
-  console.log(GameFlow.winner(playerJason, playerMark));
-GameFlow.makeMove(4, playerMark);
-console.log(GameFlow.winner(playerJason, playerMark));
-GameFlow.makeMove(6, playerJason);
-console.log(GameFlow.winner(playerJason, playerMark));
-GameFlow.makeMove(7, playerMark);
-console.log(GameFlow.winner(playerJason, playerMark));
-GameFlow.makeMove(8, playerJason);
-console.log(GameFlow.winner(playerJason, playerMark));
 //0,2,1,3,5,4,6,7,8
 
 console.log(GameBoard.gameBoard);
