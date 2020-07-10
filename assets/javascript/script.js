@@ -1,4 +1,4 @@
-const readline = require('readline-sync');
+// const readline = require('readline-sync');
 
 const Player = (name, tag) => {
   const getName = () => name;
@@ -79,18 +79,27 @@ const GameFlow = (() => {
 const playerJason = GameFlow.addPlayer('Jason', 'X');
 const playerMark = GameFlow.addPlayer('Mark', 'O');
 
-// init play entering a position 
-let index = 1;
-while (!GameFlow.theresWinner(playerJason, playerMark) && !GameFlow.itsDraw()) {
-  const player = index % 2 === 1 ? playerJason : playerMark;
-  const indice = readline.question(`Enter index position ${player.getName()}: `);
-  GameFlow.makeMove(+indice, player);
+const gameBoard = document.getElementsByClassName('btn');
 
-  if (index >= 5) {
-    console.log(GameFlow.winner(playerJason, playerMark));
-  }
-  index += 1;
+for (let i = 0; i < gameBoard.length; i += 1) {
+  gameBoard[i].addEventListener('click', function name() {
+    alert(this.getAttribute("define-custom-id"));
+  });
 }
+
+
+// init play entering a position 
+// let index = 1;
+// while (!GameFlow.theresWinner(playerJason, playerMark) && !GameFlow.itsDraw()) {
+//   const player = index % 2 === 1 ? playerJason : playerMark;
+//   const indice = readline.question(`Enter index position ${player.getName()}: `);
+//   GameFlow.makeMove(+indice, player);
+
+//   if (index >= 5) {
+//     console.log(GameFlow.winner(playerJason, playerMark));
+//   }
+//   index += 1;
+// }
 
 //0,2,1,3,5,4,6,7,8  tie
 //0,1,2,3,4,5,6,7
