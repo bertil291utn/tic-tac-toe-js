@@ -16,7 +16,7 @@ const GameBoard = (() => {
 
   const gameBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  const fullGameBoard = () => gameBoard.every(r => (/(X|O)/).test(r));
+  const fullGameBoard = () => GameBoard.gameBoard.every(r => (/(X|O)/).test(r));
 
   return {
     winningGame,
@@ -40,11 +40,11 @@ const GameFlow = (() => {
   const gameOutcome = (player) => GameBoard.winningGame.some(winMatch => winMatch.every(r => player.choices.includes(r)));
 
   const winner = (player1, player2) => {
-    if (gameOutcome(player1)) {
+    if (GameFlow.gameOutcome(player1)) {
       return `Player ${player1.getName()} is the winner`;
     }
 
-    if (gameOutcome(player2)) {
+    if (GameFlow.gameOutcome(player2)) {
       return `Player ${player2.getName()} is the winner`;
     }
 
@@ -55,7 +55,7 @@ const GameFlow = (() => {
   };
 
   const theresWinner = (player1, player2) => {
-    if (gameOutcome(player1) || gameOutcome(player2)) {
+    if (GameFlow.gameOutcome(player1) || GameFlow.gameOutcome(player2)) {
       return true;
     }
     return false;
@@ -83,17 +83,17 @@ const playerJason = GameFlow.addPlayer('Jason', 'X');
 const playerMark = GameFlow.addPlayer('Mark', 'O');
 
 // init play entering a position 
-// let index = 1;
-// while (!GameFlow.theresWinner(playerJason, playerMark) || GameFlow.itsDraw()) {
-//   const player = index % 2 === 1 ? playerJason : playerMark;
-//   const indice = readline.question(`Enter index position ${player.getName()}: `);
-//   GameFlow.makeMove(+indice, player);
+let index = 1;
+while (!GameFlow.theresWinner(playerJason, playerMark) || GameFlow.itsDraw()) {
+  const player = index % 2 === 1 ? playerJason : playerMark;
+  const indice = readline.question(`Enter index position ${player.getName()}: `);
+  GameFlow.makeMove(+indice, player);
 
-//   if (index >= 5) {
-//     console.log(GameFlow.winner(playerJason, playerMark));
-//   }
-//   index += 1;
-// }
+  if (index >= 5) {
+    console.log(GameFlow.winner(playerJason, playerMark));
+  }
+  index += 1;
+}
 
 //0,2,1,3,5,4,6,7,8  tie
 //0,1,2,3,4,5,6,7
@@ -115,4 +115,16 @@ console.log(GameBoard.gameBoard);
 console.log(GameBoard.fullGameBoard());
 console.log(GameBoard.gameBoard.every(r => (/(X|O)/).test(r)));
 
-
+// Plan B
+GameFlow.makeMove(+indice, player);
+GameFlow.makeMove(+indice, player);
+GameFlow.makeMove(+indice, player);
+GameFlow.makeMove(+indice, player);
+GameFlow.makeMove(+indice, player);
+GameFlow.winner(playerJason, playerMark);
+GameFlow.makeMove(+indice, player);
+GameFlow.winner(playerJason, playerMark);
+GameFlow.makeMove(+indice, player);
+GameFlow.winner(playerJason, playerMark);
+GameFlow.makeMove(+indice, player);
+GameFlow.winner(playerJason, playerMark);
