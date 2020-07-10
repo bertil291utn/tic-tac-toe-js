@@ -1,18 +1,50 @@
+@font-face {
+  font-family: 'indie_flowerregular';
+  src:
+    url('/assets/fonts/indieflower-regular-webfont.woff2') format('woff2'),
+    url('/assets/fonts/indieflower-regular-webfont.woff2') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'indie_flowerregular', Arial, sans-serif;
+}
+
+.handwrng-font {
+
+}
+
 #board {
   height: 90%;
   width: 90%;
   margin: auto;
 }
-.row { height:250px; }
+.row { height: 250px; }
+
 .row2 {
   border-bottom: 5px solid red;
   border-top: 5px solid red;
 }
+
 .btn {
+  position: relative;
   height: 100%;
   width: 32%;
   display: inline-block;
+  cursor: pointer;
 }
+
+.btn:hover {
+  background-color: #ff000012;
+}
+
+.btn span {
+  position: absolute;
+  font-size: 15em;
+  left: 25%;
+}
+
 .middle {
   border-left: 5px solid red;
   border-right: 5px solid red;

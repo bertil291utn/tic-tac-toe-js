@@ -5,9 +5,6 @@ const Player = (name, tag) => {
   const getTag = () => tag;
   const choices = [];
 
-  const move = () => {
-
-  };
   return { getName, getTag, choices };
 };
 
@@ -84,7 +81,7 @@ const playerMark = GameFlow.addPlayer('Mark', 'O');
 
 // init play entering a position 
 let index = 1;
-while (!GameFlow.theresWinner(playerJason, playerMark) || GameFlow.itsDraw()) {
+while (!GameFlow.theresWinner(playerJason, playerMark) && !GameFlow.itsDraw()) {
   const player = index % 2 === 1 ? playerJason : playerMark;
   const indice = readline.question(`Enter index position ${player.getName()}: `);
   GameFlow.makeMove(+indice, player);
@@ -97,34 +94,34 @@ while (!GameFlow.theresWinner(playerJason, playerMark) || GameFlow.itsDraw()) {
 
 //0,2,1,3,5,4,6,7,8  tie
 //0,1,2,3,4,5,6,7
-playerJason.choices = [0, 1, 5, 6, 7];
-playerMark.choices = [2, 3, 4, 8];
-GameBoard.gameBoard = ['X', 'X', 'O',
-                       'O', 'O', 'X',
-                       'X', 'X', 'O'];
-console.log(playerJason.choices);
-console.log(playerMark.choices);
-console.log(GameFlow.theresWinner(playerJason, playerMark));
-console.log("GameOutcome:");
-console.log(GameFlow.gameOutcome(playerJason));
-console.log("Tie?:");
-console.log(GameFlow.winner(playerJason, playerMark));
-//0,2,1,3,5,4,6,7,8
+// playerJason.choices = [0, 1, 5, 6, 7];
+// playerMark.choices = [2, 3, 4, 8];
+// GameBoard.gameBoard = ['X', 'X', 'O',
+//                        'O', 'O', 'X',
+//                        'X', 'X', 'O'];
+// console.log(playerJason.choices);
+// console.log(playerMark.choices);
+// console.log(GameFlow.theresWinner(playerJason, playerMark));
+// console.log("GameOutcome:");
+// console.log(GameFlow.gameOutcome(playerJason));
+// console.log("Tie?:");
+// console.log(GameFlow.winner(playerJason, playerMark));
+// //0,2,1,3,5,4,6,7,8
 
-console.log(GameBoard.gameBoard);
-console.log(GameBoard.fullGameBoard());
-console.log(GameBoard.gameBoard.every(r => (/(X|O)/).test(r)));
+// console.log(GameBoard.gameBoard);
+// console.log(GameBoard.fullGameBoard());
+// console.log(GameBoard.gameBoard.every(r => (/(X|O)/).test(r)));
 
-// Plan B
-GameFlow.makeMove(+indice, player);
-GameFlow.makeMove(+indice, player);
-GameFlow.makeMove(+indice, player);
-GameFlow.makeMove(+indice, player);
-GameFlow.makeMove(+indice, player);
-GameFlow.winner(playerJason, playerMark);
-GameFlow.makeMove(+indice, player);
-GameFlow.winner(playerJason, playerMark);
-GameFlow.makeMove(+indice, player);
-GameFlow.winner(playerJason, playerMark);
-GameFlow.makeMove(+indice, player);
-GameFlow.winner(playerJason, playerMark);
+// // Plan B
+// GameFlow.makeMove(+indice, player);
+// GameFlow.makeMove(+indice, player);
+// GameFlow.makeMove(+indice, player);
+// GameFlow.makeMove(+indice, player);
+// GameFlow.makeMove(+indice, player);
+// GameFlow.winner(playerJason, playerMark);
+// GameFlow.makeMove(+indice, player);
+// GameFlow.winner(playerJason, playerMark);
+// GameFlow.makeMove(+indice, player);
+// GameFlow.winner(playerJason, playerMark);
+// GameFlow.makeMove(+indice, player);
+// GameFlow.winner(playerJason, playerMark);
