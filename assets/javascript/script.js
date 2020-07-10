@@ -1,5 +1,7 @@
 // const readline = require('readline-sync');
 const btn = document.querySelectorAll('[define-custom-id]');
+const status = document.querySelector('#status');
+let stepCounter = 1;
 
 const Player = (name, tag) => {
   const getName = () => name;
@@ -8,6 +10,7 @@ const Player = (name, tag) => {
 
   return { getName, getTag, choices };
 };
+
 
 const GameBoard = (() => {
   const winningGame = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
@@ -81,8 +84,6 @@ const DOM = (() => {
   const gameBoardRender = (gameBoard) => {
     gameBoard.forEach((elem, index) => {
       btn[index].childNodes[0].innerHTML = typeof (elem) === 'number' ? '' : elem;
-      btn[index].disabled = true;
-
     });
   };
 
@@ -96,21 +97,38 @@ const playerMark = GameFlow.addPlayer('Mark', 'O');
 
 const gameBoard = document.getElementsByClassName('btn');
 
-GameBoard.gameBoard = [0, 1, 'O',
-  'O', 'O', 'X',
-  'X', 'X', 'O'];
+// GameBoard.gameBoard = [0, 1, 'O',
+//   'O', 'O', 'X',
+//   'X', 'X', 'O'];
 
 DOM.gameBoardRender(GameBoard.gameBoard);
-for (let i = 0; i < gameBoard.length; i += 1) {
-  if ((/(X|O)/).test(GameBoard.gameBoard[i])) {
-    btn[i].classList.remove('active-game-block');
-  }
 
+for (let i = 0; i < gameBoard.length; i += 1) {
   gameBoard[i].addEventListener('click', function name(e) {
     if (!(/(X|O)/).test(GameBoard.gameBoard[i])) {
-      //e.preventDefault();
-      alert(this.getAttribute("define-custom-id"));
+      // e.preventDefault();
+      const btnIndex = this.getAttribute("define-custom-id");
+      const player = stepCounter % 2 === 0 ? playerJason : playerMark;
+      GameFlow.makeMove(+btnIndex, player);
+      if ((/(X|O)/).test(GameBoard.gameBoard[i])) {
+        btn[i].classList.remove('active-game-block');
+      }
+      DOM.gameBoardRender(GameBoard.gameBoard);
+      if (stepCounter >= 5) {
+        const message = GameFlow.winner(playerJason, playerMark);
+        status.innerHTML = message;
+        if (GameFlow.theresWinner) {
+          GameBoard.gameBoard.forEach((e, i) => {
+            if ((/\d/).test(e)) {
+              btn[i].classList.remove('active-game-block');
+              // block the click function
+            }
+          })
+        }
+      }
+      stepCounter += 1;
     }
+
   });
 }
 

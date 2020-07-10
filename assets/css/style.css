@@ -15,6 +15,17 @@ body {
 
 }
 
+#status {
+  height: 100px;
+  border-radius: 5px;
+  border: 2px solid #666;
+  margin: 20px auto;
+  min-width: 50%;
+  text-align: center;
+  justify-self: normal;
+  font-size: 3em;
+}
+
 #board {
   height: 90%;
   width: 90%;
