@@ -1,4 +1,5 @@
 // const readline = require('readline-sync');
+const btn = document.querySelectorAll('[define-custom-id]');
 
 const Player = (name, tag) => {
   const getName = () => name;
@@ -32,7 +33,7 @@ const GameFlow = (() => {
     player.choices.push(index);
   };
 
-  const displayBoard = () => {};
+  const displayBoard = () => { };
 
   const gameOutcome = (player) => GameBoard.winningGame.some(winMatch => winMatch.every(r => player.choices.includes(r)));
 
@@ -76,14 +77,14 @@ const GameFlow = (() => {
   };
 })();
 
-const DOM = (() {
-  const gameBoardRender = () => {
-    const btn = document.querySelectorAll('[define-custom-id]');
-    const sp = document.createElement('span');
-    GameBoard.gameBoard.forEach(e => {
-      btn[index]..childNodes[0].innerHTML = "player.sign";
+const DOM = (() => {
+  const gameBoardRender = (gameBoard) => {
+    gameBoard.forEach((elem, index) => {
+      btn[index].childNodes[0].innerHTML = typeof (elem) === 'number' ? '' : elem;
+      btn[index].disabled = true;
+
     });
-  }
+  };
 
   return {
     gameBoardRender,
@@ -95,9 +96,21 @@ const playerMark = GameFlow.addPlayer('Mark', 'O');
 
 const gameBoard = document.getElementsByClassName('btn');
 
+GameBoard.gameBoard = [0, 1, 'O',
+  'O', 'O', 'X',
+  'X', 'X', 'O'];
+
+DOM.gameBoardRender(GameBoard.gameBoard);
 for (let i = 0; i < gameBoard.length; i += 1) {
-  gameBoard[i].addEventListener('click', function name() {
-    alert(this.getAttribute("define-custom-id"));
+  if ((/(X|O)/).test(GameBoard.gameBoard[i])) {
+    btn[i].classList.remove('active-game-block');
+  }
+
+  gameBoard[i].addEventListener('click', function name(e) {
+    if (!(/(X|O)/).test(GameBoard.gameBoard[i])) {
+      //e.preventDefault();
+      alert(this.getAttribute("define-custom-id"));
+    }
   });
 }
 
