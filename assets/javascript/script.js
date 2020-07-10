@@ -32,7 +32,7 @@ const GameFlow = (() => {
     player.choices.push(index);
   };
 
-  const displayBoard = () => { console.log(GameBoard.gameBoard); };
+  const displayBoard = () => {};
 
   const gameOutcome = (player) => GameBoard.winningGame.some(winMatch => winMatch.every(r => player.choices.includes(r)));
 
@@ -73,6 +73,20 @@ const GameFlow = (() => {
     winner,
     theresWinner,
     itsDraw,
+  };
+})();
+
+const DOM = (() {
+  const gameBoardRender = () => {
+    const btn = document.querySelectorAll('[define-custom-id]');
+    const sp = document.createElement('span');
+    GameBoard.gameBoard.forEach(e => {
+      btn[index]..childNodes[0].innerHTML = "player.sign";
+    });
+  }
+
+  return {
+    gameBoardRender,
   };
 })();
 
