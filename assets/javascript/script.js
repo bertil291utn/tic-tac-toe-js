@@ -105,30 +105,29 @@ DOM.gameBoardRender(GameBoard.gameBoard);
 
 for (let i = 0; i < gameBoard.length; i += 1) {
   gameBoard[i].addEventListener('click', function name(e) {
-    if (!(/(X|O)/).test(GameBoard.gameBoard[i])) {
+    if (!(/(X|O)/).test(GameBoard.gameBoard[i]) && !GameFlow.theresWinner(playerJason, playerMark)) {
       // e.preventDefault();
       const btnIndex = this.getAttribute("define-custom-id");
       const player = stepCounter % 2 === 0 ? playerJason : playerMark;
       GameFlow.makeMove(+btnIndex, player);
-      if ((/(X|O)/).test(GameBoard.gameBoard[i])) {
-        btn[i].classList.remove('active-game-block');
-      }
+      // if ((/(X|O)/).test(GameBoard.gameBoard[i])) {
+      //   btn[i].classList.remove('active-game-block');
+      // }
       DOM.gameBoardRender(GameBoard.gameBoard);
       if (stepCounter >= 5) {
         const message = GameFlow.winner(playerJason, playerMark);
         status.innerHTML = message;
-        if (GameFlow.theresWinner) {
-          GameBoard.gameBoard.forEach((e, i) => {
-            if ((/\d/).test(e)) {
-              btn[i].classList.remove('active-game-block');
-              // block the click function
-            }
-          })
-        }
+        console.log(GameFlow.theresWinner);
       }
       stepCounter += 1;
     }
-
+    if (GameFlow.theresWinner(playerJason, playerMark)) {
+      GameBoard.gameBoard.forEach((e, i) => {
+        if ((/\d/).test(e)) {
+          btn[i].classList.remove('active-game-block');
+        }
+      })
+    }
   });
 }
 

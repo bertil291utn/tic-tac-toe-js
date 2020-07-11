@@ -11,19 +11,15 @@ body {
   font-family: 'indie_flowerregular', Arial, sans-serif;
 }
 
-.handwrng-font {
-
-}
-
 #status {
-  height: 100px;
+  height: 80px;
   border-radius: 5px;
   border: 2px solid #666;
+  font-size: 3em;
   margin: 20px auto;
   min-width: 50%;
+  padding-top: 18px;
   text-align: center;
-  justify-self: normal;
-  font-size: 3em;
 }
 
 #board {
@@ -31,6 +27,7 @@ body {
   width: 90%;
   margin: auto;
 }
+
 .row { height: 250px; }
 
 .row2 {
@@ -39,10 +36,10 @@ body {
 }
 
 .btn {
-  position: relative;
-  height: 100%;
-  width: 32%;
   display: inline-block;
+  height: 100%;
+  position: relative;
+  width: 32%;
 }
 
 .active-game-block:hover {
@@ -51,9 +48,9 @@ body {
 }
 
 .btn span {
-  position: absolute;
   font-size: 15em;
   left: 25%;
+  position: absolute;
 }
 
 .middle {
