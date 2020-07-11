@@ -1,10 +1,12 @@
-// const readline = require('readline-sync');
-const btn = document.querySelectorAll('[define-custom-id]');
+const btn = document.querySelectorAll('[data-id]');
 const status = document.querySelector('#status');
-const gameBoard = document.getElementsByClassName('btn');
+const DOMBoard= document.querySelector('#board');
+const player1Name= document.querySelector('#playerOneName');
+const player2Name= document.querySelector('#playerTwoName');
+const playersForm= document.querySelector('#playersForm');
 
 let stepCounter = 1;
-
+let players;
 const Player = (name, tag) => {
   const getName = () => name;
   const getTag = () => tag;
@@ -37,11 +39,8 @@ const GameBoard = (() => {
 })();
 
 const GameFlow = (() => {
-  // create an player
-  // add a sign
   const addPlayer = (name, tag) => Player(name, tag);
   const makeMove = (index, player) => {
-    // GameBoard.gameBoard[index] = player.getTag();
     GameBoard.gameBoard.splice(index, 1, player.getTag());
     player.choices.push(index);
   };
@@ -52,15 +51,15 @@ const GameFlow = (() => {
 
   const winner = (player1, player2) => {
     if (GameFlow.gameOutcome(player1)) {
-      return `Player ${player1.getName()} is the winner`;
+      return `${player1.getName()} you've won the game`;
     }
 
     if (GameFlow.gameOutcome(player2)) {
-      return `Player ${player2.getName()} is the winner`;
+      return `${player2.getName()} you've won the game`;
     }
 
     if (GameBoard.fullGameBoard()) {
-      return "It's a draw";
+      return "DRAW";
     }
     return '';
   };
@@ -72,7 +71,7 @@ const GameFlow = (() => {
     return false;
   };
 
-  const itsDraw = () => {
+  const isDraw = () => {
     if (GameBoard.fullGameBoard()) {
       return true;
     }
@@ -85,7 +84,7 @@ const GameFlow = (() => {
     gameOutcome,
     winner,
     theresWinner,
-    itsDraw,
+    isDraw,
   };
 })();
 
@@ -96,14 +95,14 @@ const DOM = (() => {
     });
   };
 
-  const gameFlowDOM = (player1, player2, index, objecto) => {
-    if (!/(X|O)/.test(GameBoard.gameBoard[index]) && !GameFlow.theresWinner(player1, player2)
+  const gameFlowDOM = (player1, player2, position) => {
+    if (!/(X|O)/.test(GameBoard.gameBoard[position]) && !GameFlow.theresWinner(player1, player2)
+    && !GameFlow.isDraw()
     ) {
-      const btnIndex = objecto.getAttribute('define-custom-id');
-      const player = stepCounter % 2 === 0 ? player1 : player2;
-      GameFlow.makeMove(+btnIndex, player);
-      if (/(X|O)/.test(GameBoard.gameBoard[index])) {
-        btn[index].classList.remove('active-game-block');
+      const player = stepCounter % 2 === 1 ? player1 : player2;
+      GameFlow.makeMove(+position, player);
+      if ((/(X|O)/).test(GameBoard.gameBoard[position])) {
+        btn[position].classList.remove('active-game-block');
       }
       DOM.gameBoardRender(GameBoard.gameBoard);
       if (stepCounter >= 5) {
@@ -112,29 +111,38 @@ const DOM = (() => {
       }
       stepCounter += 1;
     }
-    if (GameFlow.theresWinner(player1, player2)) {
-      GameBoard.gameBoard.forEach((e, i) => {
-        if (/\d/.test(e)) {
-          btn[i].classList.remove('active-game-block');
+    if (GameFlow.theresWinner(player1, player2)||GameFlow.isDraw()) {
+      status.classList.remove('hidden');
+      GameBoard.gameBoard.forEach((obj, index) => {
+        if (/\d/.test(obj)) {
+          btn[index].classList.remove('active-game-block');
         }
       });
     }
   };
+  const initGame=(player1Name,player2Name)=>{
+    const playerOne = GameFlow.addPlayer(player1Name, 'X');
+    const playerTwo = GameFlow.addPlayer(player2Name, 'O');
+    return{ playerOne, playerTwo }
+  }
 
   return {
     gameBoardRender,
     gameFlowDOM,
+    initGame,
   };
 })();
 
-const playerJason = GameFlow.addPlayer('Jason', 'X');
-const playerMark = GameFlow.addPlayer('Mark', 'O');
 
 DOM.gameBoardRender(GameBoard.gameBoard);
+playersForm.addEventListener('submit',(e)=>{
+  e.preventDefault();
+  players=DOM.initGame(player1Name.value||'Player 1',player2Name.value||'Player 2');
+  DOMBoard.classList.remove('hidden');
+  playersForm.classList.add('hidden');
 
-for (let i = 0; i < gameBoard.length; i += 1) {
-  gameBoard[i].addEventListener('click', function name(e) {
-    e.preventDefault();
-    DOM.gameFlowDOM(playerJason, playerMark, i, this);
-  });
-}
+})
+
+DOMBoard.onclick = e => {
+  DOM.gameFlowDOM(players.playerOne, players.playerTwo, e.target.getAttribute('data-id'));
+};

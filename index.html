@@ -13,27 +13,27 @@
   <h1>TIC TAC TOE GAME</h1>
   <div id="status" class="hidden"></div>
 
-  <form id="playersForm" class="">
-    <input type="text" id="playerOne" placeholder="Enter a name for player 1" class="formInputs"></br>
-    <input type="text" id="playerTwo" placeholder="Enter a name for player 1" class="formInputs"></br>
+  <form id="playersForm">
+    <input type="text" id="playerOneName" placeholder="Enter a name for player 1" class="formInputs" required></br>
+    <input type="text" id="playerTwoName" placeholder="Enter a name for player 2" class="formInputs" required></br>
     <input type="submit" id="startGameBtn" value="Start Game" class="formInputs">
   </form>
 
   <div class="hidden" id="board">
     <div class="row">
-      <div class="btn active-game-block" define-custom-id="0" ><span>X</span></div>
-      <div class="btn active-game-block middle" define-custom-id="1"><span>O</span></div>
-      <div class="btn active-game-block" define-custom-id="2"><span>X</span></div>
+      <div class="btn active-game-block" data-id="0" ><span>X</span></div>
+      <div class="btn active-game-block middle" data-id="1"><span>O</span></div>
+      <div class="btn active-game-block" data-id="2"><span>X</span></div>
     </div>
     <div class="row row2">
-      <div class="btn active-game-block" define-custom-id="3"><span>O</span></div>
-      <div class="btn active-game-block middle" define-custom-id="4"><span></span></div>
-      <div class="btn active-game-block" define-custom-id="5"><span>O</span></div>
+      <div class="btn active-game-block" data-id="3"><span>O</span></div>
+      <div class="btn active-game-block middle" data-id="4"><span></span></div>
+      <div class="btn active-game-block" data-id="5"><span>O</span></div>
     </div>
     <div class="row">
-      <div class="btn active-game-block" define-custom-id="6"><span>O</span></div>
-      <div class="btn active-game-block middle" define-custom-id="7"><span>X</span></div>
-      <div class="btn active-game-block" define-custom-id="8"><span>O</span></div>
+      <div class="btn active-game-block" data-id="6"><span>O</span></div>
+      <div class="btn active-game-block middle" data-id="7"><span>X</span></div>
+      <div class="btn active-game-block" data-id="8"><span>O</span></div>
     </div>
   </div>
 
