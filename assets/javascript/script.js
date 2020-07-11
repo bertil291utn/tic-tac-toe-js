@@ -1,9 +1,9 @@
 const btn = document.querySelectorAll('[data-id]');
 const status = document.querySelector('#status');
-const DOMBoard= document.querySelector('#board');
-const player1Name= document.querySelector('#playerOneName');
-const player2Name= document.querySelector('#playerTwoName');
-const playersForm= document.querySelector('#playersForm');
+const DOMBoard = document.querySelector('#board');
+const player1Name = document.querySelector('#playerOneName');
+const player2Name = document.querySelector('#playerTwoName');
+const playersForm = document.querySelector('#playersForm');
 
 let stepCounter = 1;
 let players;
@@ -59,7 +59,7 @@ const GameFlow = (() => {
     }
 
     if (GameBoard.fullGameBoard()) {
-      return "DRAW";
+      return 'DRAW';
     }
     return '';
   };
@@ -111,7 +111,7 @@ const DOM = (() => {
       }
       stepCounter += 1;
     }
-    if (GameFlow.theresWinner(player1, player2)||GameFlow.isDraw()) {
+    if (GameFlow.theresWinner(player1, player2) || GameFlow.isDraw()) {
       status.classList.remove('hidden');
       GameBoard.gameBoard.forEach((obj, index) => {
         if (/\d/.test(obj)) {
@@ -120,11 +120,11 @@ const DOM = (() => {
       });
     }
   };
-  const initGame=(player1Name,player2Name)=>{
+  const initGame = (player1Name, player2Name) => {
     const playerOne = GameFlow.addPlayer(player1Name, 'X');
     const playerTwo = GameFlow.addPlayer(player2Name, 'O');
-    return{ playerOne, playerTwo }
-  }
+    return { playerOne, playerTwo };
+  };
 
   return {
     gameBoardRender,
@@ -135,13 +135,12 @@ const DOM = (() => {
 
 
 DOM.gameBoardRender(GameBoard.gameBoard);
-playersForm.addEventListener('submit',(e)=>{
+playersForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  players=DOM.initGame(player1Name.value||'Player 1',player2Name.value||'Player 2');
+  players = DOM.initGame(player1Name.value || 'Player 1', player2Name.value || 'Player 2');
   DOMBoard.classList.remove('hidden');
   playersForm.classList.add('hidden');
-
-})
+});
 
 DOMBoard.onclick = e => {
   DOM.gameFlowDOM(players.playerOne, players.playerTwo, e.target.getAttribute('data-id'));
