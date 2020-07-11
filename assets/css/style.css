@@ -1,14 +1,15 @@
+
 @font-face {
-  font-family: 'indie_flowerregular';
+  font-family: 'chalktasticregular';
   src:
-    url('/assets/fonts/indieflower-regular-webfont.woff2') format('woff2'),
-    url('/assets/fonts/indieflower-regular-webfont.woff2') format('woff');
+    url('/assets/fonts/chalktastic-x1nr-webfont.woff2') format('woff2'),
+    url('/assets/fonts/chalktastic-x1nr-webfont.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 body {
-  font-family: 'indie_flowerregular', Arial, sans-serif;
+  font-family: 'chalktasticregular', Arial, sans-serif;
   text-align: center;
 }
 
