@@ -44,6 +44,16 @@ body {
 
 #startGameBtn {
   width: 53%;
+  cursor: pointer;
+  font-weight: 900;
+  background-color: #000;
+  border-color: #000;
+  color: #fff;
+  transition: font-size 1s;
+}
+
+#startGameBtn:hover {
+  font-size: 2em;
 }
 
 #board {
