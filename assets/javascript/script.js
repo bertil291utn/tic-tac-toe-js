@@ -46,10 +46,9 @@ const GameFlow = (() => {
     player.choices.push(index);
   };
 
-  const gameOutcome = (player) =>
-    GameBoard.winningGame.some((winMatch) =>
-      winMatch.every((r) => player.choices.includes(r))
-    );
+  function gameOutcome(player) {
+    return GameBoard.winningGame.some((win) => win.every((r) => player.choices.includes(r)));
+  }
 
   const winner = (player1, player2) => {
     if (GameFlow.gameOutcome(player1)) {
@@ -98,9 +97,7 @@ const DOM = (() => {
   };
 
   const gameFlowDOM = (player1, player2, index, objecto) => {
-    if (
-      !/(X|O)/.test(GameBoard.gameBoard[index]) &&
-      !GameFlow.theresWinner(player1, player2)
+    if (!/(X|O)/.test(GameBoard.gameBoard[index]) && !GameFlow.theresWinner(player1, player2)
     ) {
       const btnIndex = objecto.getAttribute('define-custom-id');
       const player = stepCounter % 2 === 0 ? player1 : player2;

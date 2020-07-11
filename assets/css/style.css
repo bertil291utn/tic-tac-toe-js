@@ -9,6 +9,7 @@
 
 body {
   font-family: 'indie_flowerregular', Arial, sans-serif;
+  text-align: center;
 }
 
 #status {
@@ -20,6 +21,29 @@ body {
   min-width: 50%;
   padding-top: 18px;
   text-align: center;
+}
+
+.hidden { display: none; }
+
+#playerOne,
+#playerTwo {
+  display: inline;
+  margin: 10px auto;
+  width: 50%;
+}
+
+#playerTwo { margin-bottom: 50px; }
+
+.formInputs {
+  border: 2px solid #666;
+  border-radius: 5px;
+  font-size: 1.5em;
+  height: 50px;
+  padding-left: 14px;
+}
+
+#startGameBtn {
+  width: 53%;
 }
 
 #board {

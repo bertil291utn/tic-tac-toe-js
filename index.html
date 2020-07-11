@@ -11,8 +11,15 @@
 
 <body>
   <h1>TIC TAC TOE GAME</h1>
-  <div id="status"></div>
-  <div class="" id="board">
+  <div id="status" class="hidden"></div>
+
+  <form id="playersForm" class="">
+    <input type="text" id="playerOne" placeholder="Enter a name for player 1" class="formInputs"></br>
+    <input type="text" id="playerTwo" placeholder="Enter a name for player 1" class="formInputs"></br>
+    <input type="submit" id="startGameBtn" value="Start Game" class="formInputs">
+  </form>
+
+  <div class="hidden" id="board">
     <div class="row">
       <div class="btn active-game-block" define-custom-id="0" ><span>X</span></div>
       <div class="btn active-game-block middle" define-custom-id="1"><span>O</span></div>
