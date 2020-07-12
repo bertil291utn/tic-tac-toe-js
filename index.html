@@ -14,10 +14,15 @@
   <div id="status" class="hidden"></div>
 
   <form id="playersForm">
-    <input type="text" id="playerOneName" placeholder="Enter a name for player 1" class="formInputs" required></br>
-    <input type="text" id="playerTwoName" placeholder="Enter a name for player 2" class="formInputs" required></br>
+    <input type="text" id="playerOneName" placeholder="X: Enter your name player 1" class="formInputs" required><br>
+    <input type="text" id="playerTwoName" placeholder="O: Enter your name player 2" class="formInputs" required><br>
     <input type="submit" id="startGameBtn" value="Start Game" class="formInputs">
   </form>
+  
+  <div class="hidden" id="option-buttons">
+    <button id="new-game">New game</button>
+    <button id="exit">Exit</button>
+  </div>
 
   <div class="hidden" id="board">
     <div class="row">
@@ -36,10 +41,7 @@
       <div class="btn active-game-block" data-id="8"><span></span></div>
     </div>
   </div>
-  <div class="hidden" id="option-buttons">
-    <button id="new-game">New game</button>
-    <button id="exit">Exit</button>
-  </div>
+ 
 
   <script src="./assets/javascript/script.js"></script>
 </body>

@@ -5,7 +5,7 @@ const DOMBoard = document.querySelector('#board');
 const player1Name = document.querySelector('#playerOneName');
 const player2Name = document.querySelector('#playerTwoName');
 const playersForm = document.querySelector('#playersForm');
-const optionButtons = document.querySelector('#new-game');
+const optionButtons = document.querySelector('#option-buttons');
 const newGame = document.querySelector('#new-game');
 const exit = document.querySelector('#exit');
 
@@ -37,10 +37,17 @@ const GameBoard = (() => {
 
   const fullGameBoard = () => GameBoard.gameBoard.every((r) => /(X|O)/.test(r));
 
+  const render = () => {
+    GameBoard.gameBoard.forEach((elem, index) => {
+      btn[index].childNodes[0].innerHTML = typeof elem === 'number' ? '' : elem;
+    });
+  };
+
   return {
     winningGame,
     gameBoard,
     fullGameBoard,
+    render,
   };
 })();
 
@@ -95,12 +102,6 @@ const GameFlow = (() => {
 })();
 
 const DOM = (() => {
-  const gameBoardRender = (gameBoard) => {
-    gameBoard.forEach((elem, index) => {
-      btn[index].childNodes[0].innerHTML = typeof elem === 'number' ? '' : elem;
-    });
-  };
-
   const gameFlowDOM = (player1, player2, position) => {
     const thereIsGame = !/(X|O)/.test(GameBoard.gameBoard[position]) && !GameFlow.theresWinner(player1, player2)
     && !GameFlow.isDraw();
@@ -111,7 +112,7 @@ const DOM = (() => {
       if ((/(X|O)/).test(GameBoard.gameBoard[position])) {
         btn[position].classList.remove('active-game-block');
       }
-      DOM.gameBoardRender(GameBoard.gameBoard);
+      GameBoard.render();
       if (stepCounter >= 5) {
         const message = GameFlow.winner(player1, player2);
         status.innerHTML = message;
@@ -136,24 +137,34 @@ const DOM = (() => {
     return { playerOne, playerTwo };
   };
 
-  const newGameAction = () => {
-    //reset gameboard
-    //reset players choices
-    //hide status
-    //hide option buttons
+  const clearInputs = () => {
+    player1Name.value = '';
+    player2Name.value = '';
   };
 
-  const exitAction = () => {
-    //reset gameboard
-    //reset players
-    //hide status
-    //hide option buttons
-    //hide gameboard
-    //show form
+  const newGameAction = (players) => {
+    stepCounter = 1;
+    GameBoard.gameBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    players.playerOne.choices = [];
+    players.playerTwo.choices = [];
+    status.classList.add('hidden');
+    optionButtons.classList.add('hidden');
+    GameBoard.render();
+  };
+
+  const exitAction = (players) => {
+    GameBoard.gameBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    GameBoard.render();
+    clearInputs();
+    players.playerOne = undefined;
+    players.playerTwo = undefined;
+    status.classList.add('hidden');
+    optionButtons.classList.add('hidden');
+    DOMBoard.classList.add('hidden');
+    playersForm.classList.remove('hidden');
   };
 
   return {
-    gameBoardRender,
     gameFlowDOM,
     initGame,
     newGameAction,
@@ -174,9 +185,9 @@ DOMBoard.onclick = e => {
 };
 
 newGame.onclick = () => {
-  DOM.newGameAction();
+  DOM.newGameAction(players);
 };
 
 exit.onclick = () => {
-  DOM.exitAction();
+  DOM.exitAction(players);
 };

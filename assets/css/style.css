@@ -11,7 +11,7 @@
 body {
   font-family: 'chalktasticregular', Arial, sans-serif;
   text-align: center;
-  margin: 100px 0;
+  margin-bottom: 100px;
 }
 
 #status {
@@ -59,14 +59,13 @@ body {
 }
 
 #board {
-  height: 90%;
-  width: 90%;
-  margin: 100px auto;
+  width: 80%;
+  margin: 50px auto;
   color: #ff00007d;
 }
 
 .row {
-  height: 250px;
+  height: 150px;
 }
 
 .row2 {
@@ -87,7 +86,7 @@ body {
 }
 
 .btn span {
-  font-size: 15em;
+  font-size: 8em;
   left: 25%;
   position: absolute;
 }
