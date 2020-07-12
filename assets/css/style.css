@@ -11,6 +11,7 @@
 body {
   font-family: 'chalktasticregular', Arial, sans-serif;
   text-align: center;
+  margin: 100px 0;
 }
 
 #status {
@@ -60,10 +61,13 @@ body {
 #board {
   height: 90%;
   width: 90%;
-  margin: auto;
+  margin: 100px auto;
+  color: #ff00007d;
 }
 
-.row { height: 250px; }
+.row {
+  height: 250px;
+}
 
 .row2 {
   border-bottom: 5px solid red;
@@ -91,4 +95,8 @@ body {
 .middle {
   border-left: 5px solid red;
   border-right: 5px solid red;
+}
+
+#option-buttons {
+  font-size: 2em;
 }

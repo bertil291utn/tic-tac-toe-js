@@ -1,12 +1,18 @@
+// initialize DOM data
 const btn = document.querySelectorAll('[data-id]');
 const status = document.querySelector('#status');
 const DOMBoard = document.querySelector('#board');
 const player1Name = document.querySelector('#playerOneName');
 const player2Name = document.querySelector('#playerTwoName');
 const playersForm = document.querySelector('#playersForm');
+const optionButtons = document.querySelector('#new-game');
+const newGame = document.querySelector('#new-game');
+const exit = document.querySelector('#exit');
 
+// global variables
 let stepCounter = 1;
 let players;
+
 const Player = (name, tag) => {
   const getName = () => name;
   const getTag = () => tag;
@@ -96,9 +102,10 @@ const DOM = (() => {
   };
 
   const gameFlowDOM = (player1, player2, position) => {
-    if (!/(X|O)/.test(GameBoard.gameBoard[position]) && !GameFlow.theresWinner(player1, player2)
-    && !GameFlow.isDraw()
-    ) {
+    const thereIsGame = !/(X|O)/.test(GameBoard.gameBoard[position]) && !GameFlow.theresWinner(player1, player2)
+    && !GameFlow.isDraw();
+
+    if (thereIsGame) {
       const player = stepCounter % 2 === 1 ? player1 : player2;
       GameFlow.makeMove(+position, player);
       if ((/(X|O)/).test(GameBoard.gameBoard[position])) {
@@ -111,8 +118,10 @@ const DOM = (() => {
       }
       stepCounter += 1;
     }
-    if (GameFlow.theresWinner(player1, player2) || GameFlow.isDraw()) {
+    const thereIsNoGame = GameFlow.theresWinner(player1, player2) || GameFlow.isDraw();
+    if (thereIsNoGame) {
       status.classList.remove('hidden');
+      optionButtons.classList.remove('hidden');
       GameBoard.gameBoard.forEach((obj, index) => {
         if (/\d/.test(obj)) {
           btn[index].classList.remove('active-game-block');
@@ -120,21 +129,39 @@ const DOM = (() => {
       });
     }
   };
+
   const initGame = (player1Name, player2Name) => {
     const playerOne = GameFlow.addPlayer(player1Name, 'X');
     const playerTwo = GameFlow.addPlayer(player2Name, 'O');
     return { playerOne, playerTwo };
   };
 
+  const newGameAction = () => {
+    //reset gameboard
+    //reset players choices
+    //hide status
+    //hide option buttons
+  };
+
+  const exitAction = () => {
+    //reset gameboard
+    //reset players
+    //hide status
+    //hide option buttons
+    //hide gameboard
+    //show form
+  };
+
   return {
     gameBoardRender,
     gameFlowDOM,
     initGame,
+    newGameAction,
+    exitAction,
   };
 })();
 
 
-DOM.gameBoardRender(GameBoard.gameBoard);
 playersForm.addEventListener('submit', (e) => {
   e.preventDefault();
   players = DOM.initGame(player1Name.value || 'Player 1', player2Name.value || 'Player 2');
@@ -144,4 +171,12 @@ playersForm.addEventListener('submit', (e) => {
 
 DOMBoard.onclick = e => {
   DOM.gameFlowDOM(players.playerOne, players.playerTwo, e.target.getAttribute('data-id'));
+};
+
+newGame.onclick = () => {
+  DOM.newGameAction();
+};
+
+exit.onclick = () => {
+  DOM.exitAction();
 };
