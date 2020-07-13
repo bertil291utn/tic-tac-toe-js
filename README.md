@@ -72,4 +72,4 @@ If you got until here, show your love hitting the ⭐️ button, I'd really appr
 
 ## 📝 License
 
-This project is [MIT](LICENSE.md) licensed.
+This project is [MIT](LICENSE) licensed.
