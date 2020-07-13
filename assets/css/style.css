@@ -15,7 +15,7 @@ body {
 }
 
 #status {
-  height: 80px;
+  min-height: 80px;
   border-radius: 5px;
   border: 2px solid #666;
   font-size: 3em;

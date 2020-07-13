@@ -157,8 +157,8 @@ const DOM = (() => {
     GameBoard.gameBoard = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     GameBoard.render();
     clearInputs();
-    players.playerOne = undefined;
-    players.playerTwo = undefined;
+    delete players.playerOne;
+    delete players.playerTwo;
     status.classList.add('hidden');
     optionButtons.classList.add('hidden');
     DOMBoard.classList.add('hidden');
