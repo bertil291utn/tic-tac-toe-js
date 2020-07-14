@@ -1,0 +1,101 @@
+
+@font-face {
+  font-family: 'chalktasticregular';
+  src:
+    url('/assets/fonts/chalktastic-x1nr-webfont.woff2') format('woff2'),
+    url('/assets/fonts/chalktastic-x1nr-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'chalktasticregular', Arial, sans-serif;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+#status {
+  min-height: 80px;
+  border-radius: 5px;
+  border: 2px solid #666;
+  font-size: 3em;
+  margin: 20px auto;
+  min-width: 50%;
+  padding-top: 18px;
+  text-align: center;
+}
+
+.hidden { display: none; }
+
+#playerOneName,
+#playerTwoName {
+  display: inline;
+  margin: 10px auto;
+  width: 50%;
+}
+
+#playerTwo { margin-bottom: 50px; }
+
+.formInputs {
+  border: 2px solid #666;
+  border-radius: 5px;
+  font-size: 1.5em;
+  height: 50px;
+  padding-left: 14px;
+}
+
+#startGameBtn {
+  width: 53%;
+  cursor: pointer;
+  font-weight: 900;
+  background-color: #000;
+  border-color: #000;
+  color: #fff;
+  transition: font-size 1s;
+}
+
+#startGameBtn:hover {
+  font-size: 2em;
+}
+
+#board {
+  width: 80%;
+  margin: 50px auto;
+  color: #ff00007d;
+}
+
+.row {
+  height: 150px;
+}
+
+.row2 {
+  border-bottom: 5px solid red;
+  border-top: 5px solid red;
+}
+
+.btn {
+  display: inline-block;
+  height: 100%;
+  position: relative;
+  width: 32%;
+}
+
+.active-game-block:hover {
+  background-color: #ff000012;
+  cursor: pointer;
+}
+
+.btn span {
+  font-size: 8em;
+  left: 25%;
+  position: absolute;
+}
+
+.middle {
+  border-left: 5px solid red;
+  border-right: 5px solid red;
+}
+
+#option-buttons {
+  font-size: 2em;
+}
