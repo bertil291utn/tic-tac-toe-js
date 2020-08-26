@@ -91,4 +91,4 @@ const GameFlow = (() => {
   };
 })();
 
-export { Player, GameBoard };
+export { Player, GameBoard, GameFlow };
