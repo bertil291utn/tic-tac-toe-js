@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars, no-undef */
-import { Player, Gameboard } from './script';
+import { Player, GameBoard } from './script';
 // global variables
 let stepCounter = 1;
 

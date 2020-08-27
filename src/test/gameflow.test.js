@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 import { GameFlow, Player, GameBoard } from '../assets/javascript/script';
 
 describe('Game Flow module pattern ', () => {
