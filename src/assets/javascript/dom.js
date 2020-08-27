@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars, no-undef */
-
+import { Player, GameBoard } from './script';
 // global variables
 let stepCounter = 1;
 
@@ -85,3 +85,22 @@ const DOM = (() => {
     exitAction,
   };
 })();
+
+playersForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  players = DOM.initGame(player1Name.value || 'Player 1', player2Name.value || 'Player 2');
+  DOMBoard.classList.remove('hidden');
+  playersForm.classList.add('hidden');
+});
+
+DOMBoard.addEventListener('click', (e) => {
+  DOM.gameFlowDOM(players.playerOne, players.playerTwo, e.target.getAttribute('data-id'));
+});
+
+newGame.onclick = () => {
+  DOM.newGameAction(players);
+};
+
+exit.onclick = () => {
+  DOM.exitAction(players);
+};
