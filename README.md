@@ -33,6 +33,21 @@ Once you have cloned this project
 - Player 1 goes first and like so on, when there's a winner or draw it's going to display a status message
 - Click **New Game** button to start the game or **Exit** one to finish it.
 
+## Test
+We have decided to use [Jest](https://jestjs.io/docs/en/getting-started) to run the tests
+1. Get a copy of this project [this repository :blue_book:](https://github.com/bertil291utn/tic-tac-toe-js.git)
+```
+git clone https://github.com/bertil291utn/tic-tac-toe-js.git
+```
+2. In a terminal, go to the cloned directory
+```
+cd tic-tac-toe-js
+```
+3. Run all the tests
+You already have this script
+```
+npm run test
+```
 ## Deployed on Netlify
 
 Deployed on [Netlify](http://netlify.com/)  
